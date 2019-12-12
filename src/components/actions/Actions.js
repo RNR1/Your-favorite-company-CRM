@@ -13,13 +13,15 @@ class Actions extends Component {
 				
 					<label>Transfer Ownership to: </label>
 					<select name="owner">
+					<option value='' disabled defaultValue>Choose</option>
 					{this.props.clients.owners.map(o => <option key={o} value={o}>{o}</option>)}
 					</select>
 					<button>TRANSFER</button>
 				
 					<label>Send email: </label>	
 					<select name="email">
-					{this.props.clients.emailTypes.map(e => <option key={e} value={e}>{e}</option>)}
+					<option value='' disabled defaultValue>--</option>
+					{['A', 'B', 'C', 'D'].map(e => <option key={e} value={e}>{e}</option>)}
 					</select>
 					<button>SEND</button>
 

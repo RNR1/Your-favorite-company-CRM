@@ -18,7 +18,7 @@ class Clients extends Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.clients.clients.map(c => <tr key={c.id} >
+                {this.props.clients.clients.map(c => <tr key={c._id} >
                     <td>{c.name.split(" ")[0]}</td>
                     <td>{c.name.split(" ")[1]}</td>
                     <td>{c.country}</td>

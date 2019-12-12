@@ -1,6 +1,7 @@
 import { observable, computed, action } from 'mobx'
 import Client from './Client'
 const data = require('../data/data.json')
+const API_URL = 'http://localhost:8020'
 
 class Clients {
 
@@ -8,7 +9,7 @@ class Clients {
     @computed get clients() {
         return this._clients
     }
-    
+
     @computed get emailTypes() {
         return [...new Set(this._clients.map(c => c.emailType))]
     }
