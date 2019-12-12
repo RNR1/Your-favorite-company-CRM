@@ -2,24 +2,16 @@
 USE crm_project;
 
 -- DROPPER
--- DROP TABLE clients;
--- DROP TABLE employee;
+-- DROP TABLE client;
 
--- CREATE TABLE employee(
---     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     name VARCHAR(50)
--- );
-
--- CREATE TABLE clients(
+-- CREATE TABLE client(
 --     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 --     name VARCHAR(50),
 --     email VARCHAR(50),
 --     first_contact DATETIME,
---     email_type INT,
+--     email_type VARCHAR(5),
 --     sold BOOLEAN,
---     owner INT,
---     country VARCHAR(50),
-
---     FOREIGN KEY (owner) REFERENCES employee(id)
+--     owner VARCHAR(50),
+--     country VARCHAR(50)
 -- );
 

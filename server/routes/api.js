@@ -4,17 +4,21 @@ const Sequelize = require('sequelize')
 const db = new Sequelize('mysql://root:@localhost/crm_project')
 
 
-router.get(`/Clients`, async (req, res) => {
-    let customers = await db.query('SELECT * FROM clients')
-    console.log(customers)
+router.get(`/clients`, async (req, res) => {
+    try{
+        let customers = await db.query(`SELECT * FROM client`)
+        res.send(customers[0])
+    } catch(err) {
+        console.log(err)
+    }
 })
 
-router.post(`/Client`, async (req, res) => {
+router.post(`/client`, async (req, res) => {
     let customer = req.body
     console.log(customer)
 })
 
-router.put(`/Client`, async (req, res) => {
+router.put(`/client`, async (req, res) => {
     let customer = req.body
     console.log(customer)
 })

@@ -1,7 +1,7 @@
 import { observable, computed, action } from 'mobx'
-import Client from './Client'
+import axios from 'axios'
 const data = require('../data/data.json')
-const API_URL = 'http://localhost:8020'
+const API_URL = 'http://localhost:8020/api'
 
 class Clients {
 
@@ -18,8 +18,14 @@ class Clients {
         return [...new Set(this._clients.map(c => c.owner))]
     }
 
-    @action getClientsFromDB = () => {
-        this._clients = data
+    @action getClientsFromDB = async () => {
+        try {
+            let clients = await axios.get(`${API_URL}/clients`)
+            console.log(data.data)
+            this._clients = clients.data 
+        } catch(err) {
+            console.log(err)
+        }
     }
 }
 

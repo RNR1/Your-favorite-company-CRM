@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCheck} from '@fortawesome/free-solid-svg-icons'
+import Moment from 'react-moment'
 
 @inject('clients')
 @observer
@@ -18,13 +21,13 @@ class Clients extends Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.clients.clients.map(c => <tr key={c._id} >
+                {this.props.clients.clients.map(c => <tr key={c.id} >
                     <td>{c.name.split(" ")[0]}</td>
                     <td>{c.name.split(" ")[1]}</td>
                     <td>{c.country}</td>
-                    <td>{c.firstContact}</td>
-                    <td>{c.emailType}</td>
-                    <td>{c.sold ? "true" : "false"}</td>
+                    <td><Moment date={c.first_contact} format="LL"/></td>
+                    <td>{c.email_type !== "null"? c.email_type : "-"}</td>
+                    <td>{c.sold ? <FontAwesomeIcon icon={faCheck}/> : "-" }</td>
                     <td>{c.owner}</td>
                 </tr>)}
             </tbody>
