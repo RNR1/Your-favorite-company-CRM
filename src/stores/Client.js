@@ -1,15 +1,24 @@
-import { observable } from 'mobx'
+import { observable, computed, action } from 'mobx'
 
 class Client {
 
-    @observable id
     @observable name
+    @observable surname
     @observable email
-    @observable firstContact
-    @observable emailType
-    @observable sold = false
-    @observable owner
     @observable country
+    @observable owner
+
+    @observable client = ''
+    @observable transfer = ''
+    @observable emailtype = ''
+
+    @computed get fullName() {
+        return `${this.name} ${this.surname}`
+    }
+
+    @action handleInput = (name, value) => {
+        this[name] = value
+    }
 }
 
-export default Client
+export const client = new Client()

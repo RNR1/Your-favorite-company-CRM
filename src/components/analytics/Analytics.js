@@ -7,21 +7,18 @@ import {
 	faUserCircle,
 	faGlobeAmericas
 } from '@fortawesome/free-solid-svg-icons'
-import {
-	LineChart,
-	Line,
-	ResponsiveContainer,
-	CartesianGrid,
-	XAxis,
-	YAxis,
-	Tooltip,
-	Legend
-} from 'recharts'
+import VerticalComposedChart from './VerticalComposedChart'
+import ResponsiveComposedChart from './ResponsiveComposedChart'
+import PieResponsiveContainer from './PieResponsiveContainer'
+import Moment from 'react-moment'
+import SimpleLineChart from './SimpleLineChart'
 @inject('clients')
 @observer
 class Analytics extends Component {
 	componentDidMount() {
 		this.props.clients.getClientsFromDB()
+		this.props.clients.getTopEmployees()
+		this.props.clients.getSalesByCountry()
 	}
 
 	render() {
@@ -29,38 +26,34 @@ class Analytics extends Component {
 			<div>
 				<div>
 					<FontAwesomeIcon icon={faChartLine} />
-					New Clients
+					{this.props.clients.newMonthlyClients} New <Moment format='MMMM' />{' '}
+					Clients
 				</div>
 				<div>
 					<FontAwesomeIcon icon={faEnvelope} />
-					Emails Sent
+					{this.props.clients.emailsSent} Emails Sent
 				</div>
 				<div>
 					<FontAwesomeIcon icon={faUserCircle} />
-					Outstanding Clients
+					{this.props.clients.outstandingClients} Outstanding Clients
 				</div>
 				<div>
 					<FontAwesomeIcon icon={faGlobeAmericas} />
-					Hottest Country
+					Hottest Country: {this.props.clients.hottestCountry}
 				</div>
 
 				<div>
-					<h4>Top Employees</h4>
-					<LineChart
-						// layout='vertical'
-						width={730}
-						height={250}
-						data={this.props.clients.clients}
-						margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-						<CartesianGrid strokeDasharray='3 3' />
-						<XAxis dataKey='sold' />
-						<YAxis dataKey='owner' />
-						<Tooltip />
-						<Legend />
-						<Line type='monotone' dataKey='owner' stroke='#8884d8' />
-						<Line type='monotone' dataKey='sold' stroke='#82ca9d' />
-					</LineChart>
+					
+					<VerticalComposedChart data={this.props.clients._topEmployees} title="Top Employees" />
 				</div>
+				<div>
+					
+					<ResponsiveComposedChart data={this.props.clients._salesByCountry} title="Sales By Country" />
+				</div>
+				
+				<SimpleLineChart data={this.props.clients.thirtyDaysSalesBreakdown} />
+
+				<PieResponsiveContainer />
 			</div>
 		)
 	}
