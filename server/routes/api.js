@@ -17,7 +17,6 @@ router.get(`/clients`, async (req, res) => {
 router.get(`/employees/top3`, async (req, res) => {
     try {
         let employees = await db.query(`SELECT owner AS employee, COUNT(sold) AS sold FROM client GROUP BY owner ORDER BY sold DESC LIMIT 3`)
-        console.log(employees[0])
         res.send(employees[0])
     } catch(err) {
         console.log(err)
@@ -27,7 +26,6 @@ router.get(`/employees/top3`, async (req, res) => {
 router.get(`/sales/country`, async (req, res) => {
     try {
         let results = await db.query(`SELECT country, COUNT(sold) AS sales FROM client GROUP BY country`)
-        console.log(results[0])
         res.send(results[0])
     } catch(err) {
         console.log(err)
@@ -48,6 +46,7 @@ router.post(`/client`, async (req, res) => {
 
 router.put(`/update/transfer`, async (req, res) => {
     try {
+        console.log('im here')
         let clientName = req.body.client
         let newOwner = req.body.futureOwner
         let exists = await db.query(`SELECT id FROM client WHERE name = "${clientName}"`)

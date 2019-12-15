@@ -7,12 +7,11 @@ import {
 	XAxis,
 	YAxis,
 	Tooltip,
-	Legend
 } from 'recharts'
 
 export default function SimpleLineChart(props) {
 	return (
-		<div style={{ width: '50%', height: 200 }}>
+		<div className="line-chart">
             <h4>Sales Since <Moment format={'MMM-DD'} subtract={{days: 30}} /></h4>
 			<ResponsiveContainer>
 				<ComposedChart
@@ -28,7 +27,6 @@ export default function SimpleLineChart(props) {
 					<XAxis dataKey='day' />
 					<YAxis />
 					<Tooltip />
-					<Legend /> 
 					<Line type='natural' dataKey='sales' stroke='#FF6D54' strokeWidth="5" />
 				</ComposedChart>
 			</ResponsiveContainer>

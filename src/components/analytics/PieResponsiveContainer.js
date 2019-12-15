@@ -13,15 +13,12 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
 export default function PieResponsiveContainer() {
 	return (
-		<div style={{ width: '100%', height: 400 }}>
+		<div className="pie-chart">
 			<h4>Client Acquisition</h4>
 			<ResponsiveContainer>
-				<PieChart width={400} height={400}>
+				<PieChart width={200} height={250}>
 					<Pie
 						data={data}
-						cx={200}
-						cy={200}
-						outerRadius={80}
                         label="name"
 						fill='#8884d8'
 						dataKey='value'>

@@ -2,11 +2,11 @@ import { observable, computed, action } from 'mobx'
 
 class Client {
 
-    @observable name
-    @observable surname
-    @observable email
-    @observable country
-    @observable owner
+    @observable name = ''
+    @observable surname = ''
+    @observable email = ''
+    @observable country = ''
+    @observable owner = ''
 
     @observable client = ''
     @observable transfer = ''
@@ -17,6 +17,7 @@ class Client {
     }
 
     @action handleInput = (name, value) => {
+        console.log(name, value)
         this[name] = value
     }
 }

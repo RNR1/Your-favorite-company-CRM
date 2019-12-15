@@ -1,3 +1,26 @@
 .App {
   text-align: center;
 }
+
+.logo {
+  background-image: url('/logo.png');
+  background-size: cover;
+  height: 15vmin;
+  width: 100%;
+}
+
+#navbar {
+  background-color: #0a1612;
+  display: grid;
+  grid-auto-flow: column;
+  height: 10vh;
+  align-items: center;
+  color: white;
+  
+  margin-bottom: 40px
+}
+
+#navbar a {
+  color: white;
+  text-decoration: none;
+}

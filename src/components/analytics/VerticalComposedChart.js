@@ -11,26 +11,23 @@ import {
 
 export default function VerticalComposedChart(props) {
 	return (
-		<div style={{ width: '40%', height: 200 }}>
+		<div className="vertical-chart">
 			<h4>{props.title || "Title"}</h4>
 			<ResponsiveContainer>
 				<ComposedChart
 					layout='vertical'
-					width={700}
-					height={200}
 					data={props.data}
 					margin={{
-						top: 20,
-						right: 40,
-						left: 40,
-						bottom: 20
+						top: 40,
+						right: 10,
+						left: 10,
+						bottom: 40
 					}}>
 					<XAxis dataKey='sold'>
-						<Label value='Sales' offset={0} position='insideBottom' />
+						<Label value='Sales' position='insideBottom' />
 					</XAxis>
 					<YAxis dataKey='employee' type='category' />
 					<Tooltip />
-
 					<Bar dataKey='sold' barSize={20} fill='#003F5C' />
 				</ComposedChart>
 			</ResponsiveContainer>

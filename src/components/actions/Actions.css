@@ -1,0 +1,38 @@
+.update {
+    display: grid;
+    grid-gap: 20px;
+    justify-items: center;
+    /* margin-left: 30px; */
+}
+
+.update>.select-list {
+    display: grid;
+    grid-gap: 10px;
+    width: 20%;
+}
+
+.update>.labeled-button {
+    display: grid;
+    width: 20%;
+}
+
+.update>.datalist-input {
+    display: grid;
+    width: 30%;
+}
+
+.add-client {
+    display: grid;
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.add-client>.datalist-input {
+    display: grid;
+    width: 20%;
+}
+
+.add-client>.input {
+    display: grid;
+    width: 20%;
+}

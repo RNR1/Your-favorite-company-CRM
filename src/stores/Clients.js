@@ -50,7 +50,6 @@ class Clients {
 
     @computed get thirtyDaysSalesBreakdown() {
         let breakdown = []
-        // let sales = this._clients.filter(c => moment(c.first_contact) > moment(c.first_contact).subtract(30, "days"))
         for (let i = 30; i >= 0; i--) {
         let day = moment().subtract(i, "days").format('MMM-DD')       
         breakdown.push({day, sales: Math.floor(Math.random() * 10)})
@@ -99,6 +98,7 @@ class Clients {
 
 	@action transferOwnership = async (client, futureOwner) => {
 		try {
+			console.log('im here')
 			await axios.put(`${API_URL}/update/transfer`, { client, futureOwner })
 		} catch (err) {
 			console.log(err)
