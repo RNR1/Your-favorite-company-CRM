@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import Input from './Input'
 import DataListInput from './DataListInput'
 import { Button } from '@material-ui/core'
+import { toast as popup } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 @inject('clients', 'client')
 @observer
@@ -29,36 +31,28 @@ class AddClient extends Component {
 	addClient = () => {
 		let client = this.client()
 		if (this.invalidInput(client)) {
-			return
+			return popup.error('All fields are required')
 		}
 		this.props.clients.postClient(client)
+		return popup.success(`Client ${client.name} succesfully added`)
 	}
-
 
 	render() {
 		return (
 			<div className='add-client'>
 				<h3>ADD CLIENT</h3>
-				<Input label='First Name' name='name' value={this.props.client.name} />
-				<Input
-					label='Surname'
-					name='surname'
-					value={this.props.client.surname}
-				/>
-				<Input
-					label='Email'
-					name='email'
-					value={this.props.client.email}
-					type='email'
-				/>
-				<Input
-					label='Country'
-					name='country'
-					value={this.props.client.country}
-				/>
+				{this.props.client.inputData.map(i => (
+					<Input key={i.name}
+						label={i.label}
+						name={i.name}
+						value={this.props.client[i.name]}
+						type={i.type || null}
+					/>
+				))}
+
 				<DataListInput
 					listData={this.props.clients.owners}
-					label='Owner: '
+					label='Owner'
 					name='owner'
 					value={this.props.client.owner}
 				/>

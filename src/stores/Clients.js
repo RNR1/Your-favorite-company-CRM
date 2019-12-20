@@ -4,13 +4,24 @@ import moment from 'moment'
 const API_URL = 'http://localhost:8020/api'
 
 class Clients {
-    @observable _clients = []
-    @observable _topEmployees = []
-    @observable _salesByCountry = []
-    
-    @computed get clients() {
-		return this._clients
-    }
+	@observable _clients = []
+	@observable _topEmployees = []
+	@observable _salesByCountry = []
+	@observable searchInput = ''
+
+	@action handleSearch = value => {
+		this.searchInput = value
+	}
+
+	@computed get searchResults() {
+		return this._clients.filter(c =>
+			c.name.toLowerCase().includes(this.searchInput.toLowerCase())
+		)
+	}
+
+	@computed get clients() {
+		return this.searchInput ? this.searchResults : this._clients
+	}
 
 	@computed get clientNames() {
 		return this._clients.map(c => c.name)
@@ -32,7 +43,7 @@ class Clients {
 
 	@computed get outstandingClients() {
 		return this._clients.filter(c => !c.sold).length
-    }
+	}
 
 	@computed get hottestCountry() {
 		let countries = this._salesByCountry
@@ -44,19 +55,20 @@ class Clients {
 				maxValue = countries[country].sales
 				hottestCountry = countries[country].country
 			}
-        }
-        return hottestCountry
-    }
+		}
+		return hottestCountry
+	}
 
-    @computed get thirtyDaysSalesBreakdown() {
-        let breakdown = []
-        for (let i = 30; i >= 0; i--) {
-        let day = moment().subtract(i, "days").format('MMM-DD')       
-        breakdown.push({day, sales: Math.floor(Math.random() * 10)})
-        }
-        return breakdown
-    }
-
+	@computed get thirtyDaysSalesBreakdown() {
+		let breakdown = []
+		for (let i = 30; i >= 0; i--) {
+			let day = moment()
+				.subtract(i, 'days')
+				.format('MMM-DD')
+			breakdown.push({ day, sales: Math.floor(Math.random() * 10) })
+		}
+		return breakdown
+	}
 
 	@action getClientsFromDB = async () => {
 		try {
@@ -65,27 +77,27 @@ class Clients {
 		} catch (err) {
 			console.log(err)
 		}
-    }
-    
-    @action getTopEmployees = async () => {
-        try {
-            let topEmployees = await axios.get(`${API_URL}/employees/top3`)
-            this._topEmployees = topEmployees.data
-        } catch(err) {
-            console.log(err)
-            return err
-        }
-    }
+	}
 
-    @action getSalesByCountry = async () => {
-        try {
-            let salesByCountry = await axios.get(`${API_URL}/sales/country`)
-            this._salesByCountry = salesByCountry.data
-        } catch(err) {
-            console.log(err)
-            return err
-        }
-    }
+	@action getTopEmployees = async () => {
+		try {
+			let topEmployees = await axios.get(`${API_URL}/employees/top3`)
+			this._topEmployees = topEmployees.data
+		} catch (err) {
+			console.log(err)
+			return err
+		}
+	}
+
+	@action getSalesByCountry = async () => {
+		try {
+			let salesByCountry = await axios.get(`${API_URL}/sales/country`)
+			this._salesByCountry = salesByCountry.data
+		} catch (err) {
+			console.log(err)
+			return err
+		}
+	}
 
 	@action postClient = async client => {
 		try {
@@ -98,26 +110,28 @@ class Clients {
 
 	@action transferOwnership = async (client, futureOwner) => {
 		try {
-			console.log('im here')
-			await axios.put(`${API_URL}/update/transfer`, { client, futureOwner })
+			let transfer = await axios.put(`${API_URL}/update/transfer`, { client, futureOwner })
+			return transfer.data
 		} catch (err) {
-			console.log(err)
+			throw new Error(err.response.data.message)
 		}
 	}
 
 	@action sendEmail = async (client, emailType) => {
 		try {
-			await axios.put(`${API_URL}/update/send-email`, { client, emailType })
+			let send = await axios.put(`${API_URL}/update/send-email`, { client, emailType })
+			return send.data
 		} catch (err) {
-			console.log(err)
+			throw new Error(err.response.data.message)
 		}
 	}
 
 	@action declareSale = async client => {
 		try {
-			await axios.put(`${API_URL}/update/sold`, { client })
+			let sale = await axios.put(`${API_URL}/update/sold`, { client })
+			return sale.data
 		} catch (err) {
-			console.log(err)
+			throw new Error(err.response.data.message)
 		}
 	}
 }

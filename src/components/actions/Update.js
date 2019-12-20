@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import SelectList from './SelectList'
 import DataListInput from './DataListInput'
 import LabeledButton from './LabeledButton'
+import { toast as popup } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 @inject('clients', 'client')
 @observer
@@ -14,31 +16,50 @@ class Update extends Component {
 		this.props.client.handleInput(name, value)
 	}
 
-	transferOwnership = () => {
+	inputErrorHandler = (input, errMessage) => {
+		if (!input) {
+			throw new Error(errMessage)
+		}
+	}
+
+	transferOwnership = async () => {
 		let client = this.props.client.client
 		let futureOwner = this.props.client.transfer
-		console.log(client, futureOwner)
-		if (!client || !futureOwner) {
-			return
+		try {
+			this.inputErrorHandler(client, 'You must provide client name')
+			this.inputErrorHandler(futureOwner, 'You must provide new owner')
+			let transfer = await this.props.clients.transferOwnership(
+				client,
+				futureOwner
+			)
+			popup.success(transfer)
+		} catch (err) {
+			return popup.error(err.message)
 		}
-		this.props.clients.transferOwnership(client, futureOwner)
 	}
 
-	sendEmail = () => {
+	sendEmail = async () => {
 		let client = this.props.client.client
 		let type = this.props.client.emailtype
-		if (!type || !client) {
-			return
+		try {
+			this.inputErrorHandler(client, 'You must provide client name')
+			this.inputErrorHandler(type, 'You must provide email type')
+			let send = await this.props.clients.sendEmail(client, type)
+			popup.success(send)
+		} catch (err) {
+			return popup.error(err.message)
 		}
-		this.props.clients.sendEmail(client, type)
 	}
 
-	declareSale = () => {
+	declareSale = async () => {
 		let client = this.props.client.client
-		if (!client) {
-			return
+		try {
+			this.inputErrorHandler(client, 'You must provide client name')
+			let sale = await this.props.clients.declareSale(client)
+			popup.success(sale)
+			} catch(err) {
+			return popup.error(err.message)
 		}
-		this.props.clients.declareSale(client)
 	}
 
 	emailTypes = () => ['A', 'B', 'C', 'D']

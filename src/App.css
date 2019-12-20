@@ -1,12 +1,6 @@
-.App {
-  text-align: center;
-}
-
 .logo {
-  background-image: url('/logo.png');
-  background-size: cover;
-  height: 15vmin;
-  width: 100%;
+  height: auto;
+  width: 400px;
 }
 
 #navbar {

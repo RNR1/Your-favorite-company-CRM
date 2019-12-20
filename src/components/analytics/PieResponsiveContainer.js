@@ -16,7 +16,7 @@ export default function PieResponsiveContainer() {
 		<div className="pie-chart">
 			<h4>Client Acquisition</h4>
 			<ResponsiveContainer>
-				<PieChart width={200} height={250}>
+				<PieChart>
 					<Pie
 						data={data}
                         label="name"

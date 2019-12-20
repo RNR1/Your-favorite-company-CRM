@@ -15,8 +15,6 @@ export default function SimpleLineChart(props) {
             <h4>Sales Since <Moment format={'MMM-DD'} subtract={{days: 30}} /></h4>
 			<ResponsiveContainer>
 				<ComposedChart
-					width={500}
-					height={400}
 					data={props.data}
 					margin={{
 						top: 20,

@@ -13,15 +13,13 @@ export default function ResponsiveComposedChart(props) {
 		<div className='composed-chart'>
 			<h4>{props.title || 'Title'}</h4>
 			<ResponsiveContainer>
-				<ComposedChart
-					// width={300}
-					// height={400}
+				<ComposedChart barSize={50} 
 					data={props.data}
 					>
-					<XAxis dataKey='country' />
-					<YAxis />
+					<XAxis dataKey='country' type='category' />
+					<YAxis dataKey='sales' type='number' />
 					<Tooltip />
-					<Bar dataKey='sales' barSize={60} fill='#955196' />
+					<Bar dataKey='sales' a fill='#955196' />
 				</ComposedChart>
 			</ResponsiveContainer>
 		</div>
