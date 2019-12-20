@@ -42,7 +42,8 @@ class AddClient extends Component {
 			<div className='add-client'>
 				<h3>ADD CLIENT</h3>
 				{this.props.client.inputData.map(i => (
-					<Input key={i.name}
+					<Input
+						key={i.name}
 						label={i.label}
 						name={i.name}
 						value={this.props.client[i.name]}

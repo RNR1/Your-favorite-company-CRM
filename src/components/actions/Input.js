@@ -13,7 +13,7 @@ class Input extends Component {
 	}
 	render() {
 		return (
-			<div className="input">
+			<div className='input'>
 				<TextField
 					type={this.props.type}
 					name={this.props.name}
