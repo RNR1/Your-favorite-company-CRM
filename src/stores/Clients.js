@@ -110,7 +110,10 @@ class Clients {
 
 	@action transferOwnership = async (client, futureOwner) => {
 		try {
-			let transfer = await axios.put(`${API_URL}/update/transfer`, { client, futureOwner })
+			let transfer = await axios.put(`${API_URL}/update/transfer`, {
+				client,
+				futureOwner
+			})
 			return transfer.data
 		} catch (err) {
 			throw new Error(err.response.data.message)
@@ -119,7 +122,10 @@ class Clients {
 
 	@action sendEmail = async (client, emailType) => {
 		try {
-			let send = await axios.put(`${API_URL}/update/send-email`, { client, emailType })
+			let send = await axios.put(`${API_URL}/update/send-email`, {
+				client,
+				emailType
+			})
 			return send.data
 		} catch (err) {
 			throw new Error(err.response.data.message)
