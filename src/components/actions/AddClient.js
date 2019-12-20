@@ -52,7 +52,7 @@ class AddClient extends Component {
 
 				<DataListInput
 					listData={this.props.clients.owners}
-					label='Owner: '
+					label='Owner'
 					name='owner'
 					value={this.props.client.owner}
 				/>
