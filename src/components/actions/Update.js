@@ -67,7 +67,7 @@ class Update extends Component {
 	render = () => {
 		return (
 			<div className='update'>
-				<h3>UPDATE</h3>
+				<h3 className="title">UPDATE</h3>
 				<DataListInput
 					listData={this.props.clients.clientNames}
 					label='Client'

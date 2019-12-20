@@ -13,22 +13,22 @@ const checkExistence = async (table, uniqueField, fieldValue) => {
 	}
 }
 
-// const addEmployee = async name => {
-//     let exists = await checkExistence("employee", "name", name)
-// 	if (exists) {
-// 		console.log(`employee "${name}" already exists, id: ${exists.id}`)
-// 		return exists.id
-//     }
-//     try {
-// 		const query = `INSERT INTO employee VALUES(null, "${name}")`
-// 		let result = await db.query(query)
-// 		console.log(`employee "${name}" created successfuly with id ${result[0]}`)
-// 		return result[0]
-// 	} catch (err) {
-// 		console.log(err)
-// 		console.log(`error creating employee ${name}`)
-// 	}
-// }
+const addEmployee = async name => {
+    let exists = await checkExistence("employee", "name", name)
+	if (exists) {
+		console.log(`employee "${name}" already exists, id: ${exists.id}`)
+		return exists.id
+    }
+    try {
+		const query = `INSERT INTO employee VALUES(null, "${name}")`
+		let result = await db.query(query)
+		console.log(`employee "${name}" created successfuly with id ${result[0]}`)
+		return result[0]
+	} catch (err) {
+		console.log(err)
+		console.log(`error creating employee ${name}`)
+	}
+}
 
 const addClient = async (client) => {
     let exists = await checkExistence("client", "email", client.email)
@@ -52,8 +52,8 @@ const addClient = async (client) => {
 
 const addEntries = async clients => {
     for (let client of clients) {
-        // let employeeName = client.owner
-        // let employeeId = await addEmployee(employeeName)
+        let employeeName = client.owner
+        await addEmployee(employeeName)
         await addClient(client)
     }
 }

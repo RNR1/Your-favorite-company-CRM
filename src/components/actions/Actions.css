@@ -1,18 +1,47 @@
 .update {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 10px;
     justify-items: center;
 }
 
 .update>.select-list {
     display: grid;
-    grid-gap: 10px;
-    width: 20%;
+    grid-gap: 30px;
+    grid-template-areas: 'list button';
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.select-list>.MuiFormControl-root {
+    grid-area: list;
+    width: 200px;
+}
+
+.select-list>button {
+    grid-area: button;
+    width: 100px;
+    height: 40px;
 }
 
 .update>.labeled-button {
     display: grid;
-    width: 20%;
+    grid-gap: 30px;
+    grid-template-areas: 'label button';
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.labeled-button>label {
+    grid-area: label;
+    width: 200px;
+}
+
+.labeled-button>button {
+    grid-area: button;
+    width: 100px;
+    height: 40px
 }
 
 .update>.datalist-input {
