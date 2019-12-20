@@ -13,11 +13,11 @@ class Client {
     @observable emailtype = ''
 
     @computed get fullName() {
+        if (!this.name ||!this.surname) { return null }
         return `${this.name} ${this.surname}`
     }
 
     @action handleInput = (name, value) => {
-        console.log(name, value)
         this[name] = value
     }
 }

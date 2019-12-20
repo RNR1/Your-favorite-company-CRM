@@ -1,0 +1,10 @@
+table {
+    width: 90%;
+    display: grid;
+    justify-self: center;
+}
+
+th {
+    background-color: #F7CE3E;
+    font-weight: bold;
+}

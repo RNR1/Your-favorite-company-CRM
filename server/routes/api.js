@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Sequelize = require('sequelize')
-const moment = require('moment')
 const db = new Sequelize('mysql://root:@localhost/crm_project')
+const moment = require('moment')
+const H = require('./helpers')
 
 
 router.get(`/clients`, async (req, res) => {
@@ -45,50 +46,43 @@ router.post(`/client`, async (req, res) => {
 })
 
 router.put(`/update/transfer`, async (req, res) => {
+    let clientName = req.body.client
+    let newOwner = req.body.futureOwner
     try {
-        console.log('im here')
-        let clientName = req.body.client
-        let newOwner = req.body.futureOwner
-        let exists = await db.query(`SELECT id FROM client WHERE name = "${clientName}"`)
-        if (!exists[0].length) {
-            throw new Error(`Bad request: user/owner not found`)
-        }
+        await H.checkClientExistence(clientName)
         await db.query(`UPDATE client SET owner = "${newOwner}" WHERE name = "${clientName}"`)
-        res.send('OK!')
+        res.send(`${clientName}'s new owner is ${newOwner}`)
     } catch(err) {
-        console.log(err)
-        res.send(err)
+        res.status(400).json({
+                message: err.message
+        })
     }
 })
 
 router.put(`/update/send-email`, async (req, res) => {
+    let clientName = req.body.client
+    let emailType = req.body.emailType
     try {
-        let clientName = req.body.client
-        let emailType = req.body.emailType
-        let exists = await db.query(`SELECT id FROM client WHERE name = "${clientName}"`)
-        if (!exists[0].length) {
-            throw new Error(`Bad request: user not found`)
-        }
+        await H.checkClientExistence(clientName)
         await db.query(`UPDATE client SET email_type = "${emailType}" WHERE name = "${clientName}"`)
-        res.send('OK!')
+        res.send(`Email ${emailType} succesfully sent to ${clientName}`)
     } catch(err) {
-        console.log(err)
-        res.send(err)
+        res.status(400).json({
+            message: err.message
+        })
     }
 })
 
 router.put(`/update/sold`, async (req, res) => {
     try {
         let clientName = req.body.client
-        let exists = await db.query(`SELECT id, sold FROM client WHERE name = "${clientName}"`)
-        if (!exists[0].length) {
-            throw new Error(`Bad request: user not found`)
-        }
+        await H.checkClientExistence(clientName)
         await db.query(`UPDATE client SET sold = 1 WHERE name = "${clientName}"`)
-        res.send(`OK!`)
+        res.send(`New sale for ${clientName}!`)
     } catch(err) {
-        console.log(err)
-        res.send(err)
+        res.status(400).json({
+            message: err.message
+        })
     }
 })
 

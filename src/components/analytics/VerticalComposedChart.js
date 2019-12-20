@@ -16,14 +16,15 @@ export default function VerticalComposedChart(props) {
 			<ResponsiveContainer>
 				<ComposedChart
 					layout='vertical'
+					debounce={9}
 					data={props.data}
 					margin={{
-						top: 40,
+						top: 20,
 						right: 10,
 						left: 10,
-						bottom: 40
+						bottom: 20
 					}}>
-					<XAxis dataKey='sold'>
+					<XAxis dataKey='sold' type='number'>
 						<Label value='Sales' position='insideBottom' />
 					</XAxis>
 					<YAxis dataKey='employee' type='category' />

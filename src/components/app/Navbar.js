@@ -5,9 +5,15 @@ import { Button } from '@material-ui/core'
 export default function Navbar() {
 	return (
 		<div id='navbar'>
-			<Button><Link to='/clients'>Clients </Link></Button>
-			<Button><Link to='/actions'>Actions </Link></Button>
-			<Button><Link to='/analytics'>Analytics</Link></Button>
+			<Button component={Link} to='/clients'>
+				Clients
+			</Button>
+			<Button component={Link} to='/actions'>
+				Action
+			</Button>
+			<Button component={Link} to='/analytics'>
+				Analytics
+			</Button>
 		</div>
 	)
 }

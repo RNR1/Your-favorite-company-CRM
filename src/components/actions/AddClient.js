@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import Input from './Input'
 import DataListInput from './DataListInput'
 import { Button } from '@material-ui/core'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 @inject('clients', 'client')
 @observer
@@ -29,9 +31,10 @@ class AddClient extends Component {
 	addClient = () => {
 		let client = this.client()
 		if (this.invalidInput(client)) {
-			return
+			return toast.error('All fields are required')
 		}
 		this.props.clients.postClient(client)
+		return toast.success(`Client ${client.name} succesfully added`)
 	}
 
 
@@ -66,6 +69,7 @@ class AddClient extends Component {
 				<Button variant='contained' color='primary' onClick={this.addClient}>
 					Add New Client
 				</Button>
+				
 			</div>
 		)
 	}

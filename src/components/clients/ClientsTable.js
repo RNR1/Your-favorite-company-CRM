@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import Table from '@material-ui/core/Table'
 import Head from './TableHead'
 import Body from './TableBody'
 import {
+	Table,
 	TableContainer,
 	Paper,
 	TablePagination,
@@ -18,16 +18,18 @@ class ClientsTable extends Component {
 		super()
 		this.state = {
 			page: 0,
-			rowsPerPage: 25
+			rowsPerPage: 10
 		}
 	}
-	
+
 	handleChangePage = (event, newPage) => {
-		this.setState({page: newPage});
-	  };
-	
-	
-	
+		this.setState({ page: newPage })
+	}
+
+	handleRowsPerPage = (event, newRows) => {
+		this.setState({ rowsPerPage: parseInt(newRows.key) })
+	}
+
 	render() {
 		return (
 			<TableContainer component={Paper}>
@@ -35,16 +37,15 @@ class ClientsTable extends Component {
 					<Head />
 					<Body page={this.state.page} rowsPerPage={this.state.rowsPerPage} />
 					<TableFooter>
-					<TableRow>
-
-					<TablePagination
-						count={this.props.clients.clients.length}
-						rowsPerPage={this.state.rowsPerPage}
-						page={this.state.page}
-						onChangePage={this.handleChangePage}
-						
-					/>
-					</TableRow>
+						<TableRow>
+							<TablePagination
+								count={this.props.clients.clients.length}
+								rowsPerPage={this.state.rowsPerPage}
+								page={this.state.page}
+								onChangePage={this.handleChangePage}
+								onChangeRowsPerPage={this.handleRowsPerPage}
+							/>
+						</TableRow>
 					</TableFooter>
 				</Table>
 			</TableContainer>
