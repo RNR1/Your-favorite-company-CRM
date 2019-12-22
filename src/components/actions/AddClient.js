@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Input from './Input'
 import DataListInput from './DataListInput'
-import { Button } from '@material-ui/core'
+import { Button, Paper } from '@material-ui/core'
 import { toast as popup } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -39,7 +39,7 @@ class AddClient extends Component {
 
 	render() {
 		return (
-			<div className='add-client'>
+			<Paper className='add-client' style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}>
 				<h3>ADD CLIENT</h3>
 				{this.props.client.inputData.map(i => (
 					<Input
@@ -61,7 +61,7 @@ class AddClient extends Component {
 				<Button variant='contained' color='primary' onClick={this.addClient}>
 					Add New Client
 				</Button>
-			</div>
+			</Paper>
 		)
 	}
 }

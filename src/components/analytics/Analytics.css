@@ -43,9 +43,11 @@
 .charts {
     display: grid;
     height: 70vh;
-    width: 95%;
+    /* width: 95%; */
     align-content: center;
-    margin-left: 60px;
+    /* margin-left: 60px; */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
     grid-template-areas: 'vertical composed composed composed' 'line line pie pie';
 }
 

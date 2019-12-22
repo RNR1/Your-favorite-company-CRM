@@ -14,7 +14,7 @@ class Actions extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='actions'>
 				<Update />
 				<AddClient />
 				<ToastContainer position='bottom-left' />

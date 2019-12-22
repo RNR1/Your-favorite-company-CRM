@@ -7,11 +7,11 @@
   background-color: #0a1612;
   display: grid;
   grid-auto-flow: column;
-  height: 10vh;
+  height: 50px;
   align-items: center;
   color: white;
   
-  margin-bottom: 40px
+  margin-bottom: 30px
 }
 
 #navbar a {

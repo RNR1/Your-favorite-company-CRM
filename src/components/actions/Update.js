@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import SelectList from './SelectList'
 import DataListInput from './DataListInput'
 import LabeledButton from './LabeledButton'
+import {Paper} from '@material-ui/core'
 import { toast as popup } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -66,7 +67,7 @@ class Update extends Component {
 
 	render = () => {
 		return (
-			<div className='update'>
+			<Paper className='update' style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
 				<h3 className="title">UPDATE</h3>
 				<DataListInput
 					listData={this.props.clients.clientNames}
@@ -95,7 +96,7 @@ class Update extends Component {
 					action={this.declareSale}
 					buttonLabel='DECLARE'
 				/>
-			</div>
+			</Paper>
 		)
 	}
 }

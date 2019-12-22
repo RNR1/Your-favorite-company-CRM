@@ -4,13 +4,14 @@ import VerticalComposedChart from './VerticalComposedChart'
 import ResponsiveComposedChart from './ResponsiveComposedChart'
 import PieResponsiveContainer from './PieResponsiveContainer'
 import SimpleLineChart from './SimpleLineChart'
+import {Paper} from '@material-ui/core'
 
 @inject('clients')
 @observer
 class Charts extends Component {
     render() {
         return (
-            <div className="charts">
+            <Paper className="charts">
                 <VerticalComposedChart
 					data={this.props.clients._topEmployees}
 					title='Top Employees'
@@ -21,7 +22,7 @@ class Charts extends Component {
 				/>
 				<SimpleLineChart data={this.props.clients.thirtyDaysSalesBreakdown} />
 				<PieResponsiveContainer />
-			</div>
+			</Paper>
         )
     }
 }

@@ -1,7 +1,15 @@
+.actions {
+    display: grid;
+    grid-template-areas: '. update .' '. add .';
+}
+
 .update {
+    grid-area: update;
     display: grid;
     grid-gap: 10px;
     justify-items: center;
+    padding: 20px;
+    margin: 20px;
 }
 
 .update>.select-list {
@@ -50,17 +58,21 @@
 }
 
 .add-client {
+    grid-area: add;
     display: grid;
     grid-gap: 20px;
     justify-items: center;
+    padding: 20px;
+    margin: 20px;
 }
 
 .add-client>.datalist-input {
     display: grid;
-    width: 20%;
+    width: 30%;
 }
 
 .add-client>.input {
     display: grid;
-    width: 20%;
+    width: 30%;
+    
 }

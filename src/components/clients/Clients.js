@@ -13,7 +13,7 @@ class Clients extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="clients">
 				<SearchInput />
 				<ClientsTable />
 			</div>

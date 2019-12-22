@@ -6,6 +6,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ecf0f1;
+  background-image: url('/background.jpg');
+  background-size: cover;
+}
+
+.background {
+
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  
 }
 
 code {
