@@ -9,6 +9,17 @@ class Helpers {
 		}
 	}
 
+	invalidInput(client) {
+		let requiredFields = ['name', 'email', 'owner', 'country']
+		return requiredFields.some(i => !client[i])	
+	}
+
+	handleInvalidInput(input) {
+		if (this.invalidInput(input)) {
+			throw new Error('All fields are required')
+		}
+	}
+
 	async queryClientByName(clientName) {
 		return await db.query(`SELECT id FROM client WHERE name = "${clientName}"`)
 	}
@@ -17,6 +28,8 @@ class Helpers {
 		let exists = await this.queryClientByName(clientName)
 		this.queryErrorHandler(exists, 'User not found')
 	}
+
+	async validateEmailDuplications(query, email) {}
 }
 
 module.exports = new Helpers()

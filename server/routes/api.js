@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Sequelize = require('sequelize')
 const db = new Sequelize(process.env.JAWSDB_URL, {
-	dialect: 'mysql',
+	dialect: 'mysql'
 })
 const moment = require('moment')
 const H = require('./helpers')
@@ -10,12 +10,13 @@ const H = require('./helpers')
 router.get('/clients', async (req, res) => {
 	try {
 		let customers = await db.query(
-			`SELECT * FROM client ORDER BY name ASC, owner ASC`
+			`SELECT * 
+			FROM client 
+			ORDER BY name ASC, owner ASC`
 		)
-		console.log(customers[0])
 		res.send(customers[0])
 	} catch (err) {
-		console.log(err)
+		res.send(err)
 	}
 })
 
@@ -26,7 +27,7 @@ router.get('/employees/top3', async (req, res) => {
 		)
 		res.send(employees[0])
 	} catch (err) {
-		console.log(err)
+		res.send(err)
 	}
 })
 
@@ -37,22 +38,22 @@ router.get('/sales/country', async (req, res) => {
 		)
 		res.send(results[0])
 	} catch (err) {
-		console.log(err)
+		res.send(err)
 	}
 })
 
 router.post('/client', async (req, res) => {
 	try {
 		let client = req.body
+		H.handleInvalidInput(client)
 		let date = moment().format('YYYY-MM-DD')
 		await db.query(
 			`INSERT INTO client VALUES (null, "${client.name}", "${client.email}", "${date}", null, 0, "${client.owner}", "${client.country}")`
 		)
+		res.send(`Client ${client.name} succesfully added`)
 	} catch (err) {
-		console.log(err)
-		res.send(err)
+		res.status(400).json({ message: err.message })
 	}
-	res.send('OK!')
 })
 
 router.put('/update/transfer', async (req, res) => {

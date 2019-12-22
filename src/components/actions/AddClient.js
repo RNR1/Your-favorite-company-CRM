@@ -18,6 +18,12 @@ class AddClient extends Component {
 
 	invalidInput = client => Object.keys(client).some(i => !client[i])
 
+	handleError = input => {
+		if (this.invalidInput(input)) {
+			throw new Error('All fields are required')
+		}
+	}
+
 	client = () => {
 		return {
 			name: this.props.client.fullName,
@@ -30,16 +36,20 @@ class AddClient extends Component {
 
 	addClient = () => {
 		let client = this.client()
-		if (this.invalidInput(client)) {
-			return popup.error('All fields are required')
+		try {
+			this.handleError(client)
+			let add = this.props.clients.postClient(client)
+			return popup.success(add)
+		} catch (err) {
+			popup.error(err.message)
 		}
-		this.props.clients.postClient(client)
-		return popup.success(`Client ${client.name} succesfully added`)
 	}
 
 	render() {
 		return (
-			<Paper className='add-client' style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}>
+			<Paper
+				className='add-client'
+				style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
 				<h3>ADD CLIENT</h3>
 				{this.props.client.inputData.map(i => (
 					<Input

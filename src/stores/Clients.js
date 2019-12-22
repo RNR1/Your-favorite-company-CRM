@@ -101,11 +101,12 @@ class Clients {
 
 	@action postClient = async client => {
 		try {
-			await axios.post(`${API_URL}/api/client`, client)
+			let add = await axios.post(`${API_URL}/api/client`, client)
+			this.getClientsFromDB()
+			return add.data
 		} catch (err) {
-			console.log(err)
+			return err.data
 		}
-		this.getClientsFromDB()
 	}
 
 	@action transferOwnership = async (client, futureOwner) => {
