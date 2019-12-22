@@ -4,10 +4,10 @@ const api = require('./server/routes/api')
 const bodyParser = require('body-parser')
 const path = require('path')
 
-app.use(express.static(path.join(__dirname, 'build')))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static(path.join(__dirname, 'build')))
 app.use('/api', api)
 
 app.get('*', function (req, res) {
