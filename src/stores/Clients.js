@@ -1,7 +1,7 @@
 import { observable, computed, action } from 'mobx'
 import axios from 'axios'
 import moment from 'moment'
-const API_URL = 'http://localhost:8020/api'
+const API_URL = ''
 
 class Clients {
 	@observable _clients = []
