@@ -8,10 +8,6 @@ import './Actions.css'
 @inject('clients')
 @observer
 class Actions extends Component {
-	componentDidMount() {
-		this.props.clients.getClientsFromDB()
-	}
-
 	render() {
 		return (
 			<div className='actions'>
