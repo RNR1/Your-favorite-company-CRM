@@ -5,7 +5,7 @@ import DataListInput from './DataListInput'
 import { Button, Paper } from '@material-ui/core'
 import { toast as popup } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import isEmail from 'validator'
+import isEmail from 'validator/lib/isEmail';
 
 @inject('clients', 'client')
 @observer
