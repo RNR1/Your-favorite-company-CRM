@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const db = new Sequelize(process.env.CLEARDB_DATABASE_URL || 'mysql://root:@localhost/crm_project')
+const db = new Sequelize(process.env.DATABASE_URL || 'mysql://root:@localhost/crm_project')
 
 class Helpers {
 	queryErrorHandler(query, errMessage) {
