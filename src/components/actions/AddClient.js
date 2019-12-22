@@ -43,7 +43,7 @@ class AddClient extends Component {
 		try {
 			this.handleError(client)
 			let add = this.props.clients.postClient(client)
-			return popup.success(add)
+			popup.success(add)
 		} catch (err) {
 			popup.error(err.message)
 		}
