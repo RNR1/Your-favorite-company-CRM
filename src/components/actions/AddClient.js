@@ -38,11 +38,11 @@ class AddClient extends Component {
 		}
 	}
 
-	addClient = () => {
+	addClient = async () => {
 		let client = this.client()
 		try {
 			this.handleError(client)
-			let add = this.props.clients.postClient(client)
+			let add = await this.props.clients.postClient(client)
 			popup.success(add)
 		} catch (err) {
 			popup.error(err.message)
