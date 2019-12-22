@@ -24,8 +24,6 @@ class Helpers {
 		}
 	}
 
-	handle
-
 	async queryClientByName(clientName) {
 		return await db.query(`SELECT id FROM client WHERE name = "${clientName}"`)
 	}

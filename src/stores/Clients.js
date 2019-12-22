@@ -105,7 +105,7 @@ class Clients {
 			this.getClientsFromDB()
 			return add.data
 		} catch (err) {
-			return err.data
+			throw new Error(err.response.data.message)
 		}
 	}
 
