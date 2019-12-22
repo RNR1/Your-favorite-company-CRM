@@ -5,6 +5,7 @@ import DataListInput from './DataListInput'
 import { Button, Paper } from '@material-ui/core'
 import { toast as popup } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import isEmail from 'validator'
 
 @inject('clients', 'client')
 @observer
@@ -21,6 +22,9 @@ class AddClient extends Component {
 	handleError = input => {
 		if (this.invalidInput(input)) {
 			throw new Error('All fields are required')
+		}
+		if (!isEmail(input.email)) {
+			throw new Error('Must provide a valid email')
 		}
 	}
 
