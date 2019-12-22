@@ -7,18 +7,19 @@ const db = new Sequelize(process.env.JAWSDB_URL, {
 const moment = require('moment')
 const H = require('./helpers')
 
-router.get(`/clients`, async (req, res) => {
+router.get('/clients', async (req, res) => {
 	try {
 		let customers = await db.query(
 			`SELECT * FROM client ORDER BY name ASC, owner ASC`
 		)
+		console.log(customers[0])
 		res.send(customers[0])
 	} catch (err) {
 		console.log(err)
 	}
 })
 
-router.get(`/employees/top3`, async (req, res) => {
+router.get('/employees/top3', async (req, res) => {
 	try {
 		let employees = await db.query(
 			`SELECT owner AS employee, COUNT(sold) AS sold FROM client GROUP BY owner ORDER BY sold DESC LIMIT 3`
@@ -29,7 +30,7 @@ router.get(`/employees/top3`, async (req, res) => {
 	}
 })
 
-router.get(`/sales/country`, async (req, res) => {
+router.get('/sales/country', async (req, res) => {
 	try {
 		let results = await db.query(
 			`SELECT country, COUNT(sold) AS sales FROM client GROUP BY country`
@@ -40,7 +41,7 @@ router.get(`/sales/country`, async (req, res) => {
 	}
 })
 
-router.post(`/client`, async (req, res) => {
+router.post('/client', async (req, res) => {
 	try {
 		let client = req.body
 		let date = moment().format('YYYY-MM-DD')
@@ -54,7 +55,7 @@ router.post(`/client`, async (req, res) => {
 	res.send('OK!')
 })
 
-router.put(`/update/transfer`, async (req, res) => {
+router.put('/update/transfer', async (req, res) => {
 	let clientName = req.body.client
 	let newOwner = req.body.futureOwner
 	try {
@@ -70,7 +71,7 @@ router.put(`/update/transfer`, async (req, res) => {
 	}
 })
 
-router.put(`/update/send-email`, async (req, res) => {
+router.put('/update/send-email', async (req, res) => {
 	let clientName = req.body.client
 	let emailType = req.body.emailType
 	try {
@@ -86,7 +87,7 @@ router.put(`/update/send-email`, async (req, res) => {
 	}
 })
 
-router.put(`/update/sold`, async (req, res) => {
+router.put('/update/sold', async (req, res) => {
 	try {
 		let clientName = req.body.client
 		await H.checkClientExistence(clientName)

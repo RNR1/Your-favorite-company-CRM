@@ -72,7 +72,7 @@ class Clients {
 
 	@action getClientsFromDB = async () => {
 		try {
-			let clients = await axios.get(`${API_URL}/clients`)
+			let clients = await axios.get(`${API_URL}/api/clients`)
 			this._clients = clients.data
 		} catch (err) {
 			console.log(err)
@@ -81,7 +81,7 @@ class Clients {
 
 	@action getTopEmployees = async () => {
 		try {
-			let topEmployees = await axios.get(`${API_URL}/employees/top3`)
+			let topEmployees = await axios.get(`${API_URL}/api/employees/top3`)
 			this._topEmployees = topEmployees.data
 		} catch (err) {
 			console.log(err)
@@ -91,7 +91,7 @@ class Clients {
 
 	@action getSalesByCountry = async () => {
 		try {
-			let salesByCountry = await axios.get(`${API_URL}/sales/country`)
+			let salesByCountry = await axios.get(`${API_URL}/api/sales/country`)
 			this._salesByCountry = salesByCountry.data
 		} catch (err) {
 			console.log(err)
@@ -101,7 +101,7 @@ class Clients {
 
 	@action postClient = async client => {
 		try {
-			await axios.post(`${API_URL}/client`, client)
+			await axios.post(`${API_URL}/api/client`, client)
 		} catch (err) {
 			console.log(err)
 		}
@@ -110,7 +110,7 @@ class Clients {
 
 	@action transferOwnership = async (client, futureOwner) => {
 		try {
-			let transfer = await axios.put(`${API_URL}/update/transfer`, {
+			let transfer = await axios.put(`${API_URL}/api/update/transfer`, {
 				client,
 				futureOwner
 			})
@@ -122,7 +122,7 @@ class Clients {
 
 	@action sendEmail = async (client, emailType) => {
 		try {
-			let send = await axios.put(`${API_URL}/update/send-email`, {
+			let send = await axios.put(`${API_URL}/api/update/send-email`, {
 				client,
 				emailType
 			})
@@ -134,7 +134,7 @@ class Clients {
 
 	@action declareSale = async client => {
 		try {
-			let sale = await axios.put(`${API_URL}/update/sold`, { client })
+			let sale = await axios.put(`${API_URL}/api/update/sold`, { client })
 			return sale.data
 		} catch (err) {
 			throw new Error(err.response.data.message)
