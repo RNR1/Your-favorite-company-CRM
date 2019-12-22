@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Sequelize = require('sequelize')
 const db = new Sequelize(process.env.JAWSDB_URL, {
-	dialect: 'mysql'
+	dialect: 'mysql',
 })
 const moment = require('moment')
 const H = require('./helpers')

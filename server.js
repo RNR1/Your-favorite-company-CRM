@@ -3,6 +3,10 @@ const app = express()
 const api = require('./server/routes/api')
 const bodyParser = require('body-parser')
 const path = require('path')
+const Sequelize = require('sequelize')
+const db = new Sequelize(process.env.JAWSDB_URL, {
+	dialect: 'mysql',
+})
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
