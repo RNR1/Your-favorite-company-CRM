@@ -3,12 +3,6 @@ const app = express()
 const api = require('./server/routes/api')
 const bodyParser = require('body-parser')
 const path = require('path')
-const Sequelize = require('sequelize')
-let sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect:  'postgres',
-  protocol: 'postgres'
-})
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))

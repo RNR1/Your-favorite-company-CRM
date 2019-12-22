@@ -49,6 +49,7 @@
     "moment": "^2.24.0",
     "mysql2": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "5.0.3",
+    "pg": "^7.15.1",
     "pnp-webpack-plugin": "1.5.0",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",

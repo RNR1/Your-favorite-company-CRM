@@ -1,11 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Sequelize = require('sequelize')
-// const db = new Sequelize(process.env.DATABASE_URL || 'mysql://root:@localhost/crm_project')
-const db = new Sequelize(process.env.DATABASE_URL, {
-	dialect:  'postgres',
-	protocol: 'postgres'
-  })
+const db = new Sequelize(process.env.JAWSDB_URL || 'mysql://root:@localhost/crm_project')
 const moment = require('moment')
 const H = require('./helpers')
 
