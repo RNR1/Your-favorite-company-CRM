@@ -14,9 +14,9 @@ class Clients {
 	}
 
 	@computed get searchResults() {
-		return this._clients.length ? this._clients.filter(c =>
+		return this._clients.filter(c =>
 			c.name.toLowerCase().includes(this.searchInput.toLowerCase())
-		) : []
+		)
 	}
 
 	@computed get clients() {
@@ -24,25 +24,25 @@ class Clients {
 	}
 
 	@computed get clientNames() {
-		return this._clients.length ? this._clients.map(c => c.name) : []
+		return this._clients.map(c => c.name)
 	}
 
 	@computed get owners() {
-		return this._clients.length ? [...new Set(this._clients.map(c => c.owner))] : []
+		return [...new Set(this._clients.map(c => c.owner))]
 	}
 
 	@computed get newMonthlyClients() {
-		return this._clients.length ? this._clients.filter(
+		return this._clients.filter(
 			c => moment(c.first_contact).format('MM') === moment().format('MM')
-		).length : 0
+		).length
 	}
 
 	@computed get emailsSent() {
-		return this._clients.length ? this._clients.filter(c => c.email_type !== 'null').length : 0
+		return this._clients.filter(c => c.email_type !== 'null').length
 	}
 
 	@computed get outstandingClients() {
-		return this._clients.length ? this._clients.filter(c => !c.sold).length : 0
+		return this._clients.filter(c => !c.sold).length
 	}
 
 	@computed get hottestCountry() {

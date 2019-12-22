@@ -1,7 +1,9 @@
-const clients = require('./data.json')
+// const clients = require('./data.json')
 const Sequelize = require('sequelize')
 const moment = require('moment')
-const db = new Sequelize('mysql://root:@localhost/crm_project')
+const db = new Sequelize(process.env.JAWSDB_URL, {
+	dialect: 'mysql'
+})
 
 const checkExistence = async (table, uniqueField, fieldValue) => {
 	const query = `SELECT id FROM ${table} WHERE ${uniqueField} = "${fieldValue}"`
@@ -52,11 +54,12 @@ const addClient = async (client) => {
 
 const addEntries = async clients => {
     for (let client of clients) {
-        let employeeName = client.owner
-        await addEmployee(employeeName)
+        // let employeeName = client.owner
+        // await addEmployee(employeeName)
         await addClient(client)
     }
 }
 
-addEntries(clients)
+// addEntries(clients)
 
+db.query('SELECT * from client')

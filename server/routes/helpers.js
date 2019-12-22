@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
-const db = new Sequelize(process.env.JAWSDB_URL || 'mysql://root:@localhost/crm_project')
-
+const db = new Sequelize(process.env.JAWSDB_URL, {
+	dialect: 'mysql'
+})
 class Helpers {
 	queryErrorHandler(query, errMessage) {
 		if (!query[0].length) {
